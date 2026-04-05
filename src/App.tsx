@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { DigitalClock } from './components/DigitalClock'
 import './App.css'
 
 function App() {
@@ -11,23 +12,37 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('tr-TR', { hour12: false })
-  }
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('tr-TR', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
-
   return (
-    <div className="container">
-      <div className="time">{formatTime(time)}</div>
-      <div className="date">{formatDate(time)}</div>
+    <div className="app">
+      <div className="bg-gradient-right"></div>
+      <div className="bg-gradient-left"></div>
+      <header className="top-app-bar">
+        <span className="logo">CHRONOS</span>
+        <div className="header-actions">
+          <button className="icon-button" aria-label="Ayarlar">
+            <span className="material-symbols-outlined">settings</span>
+          </button>
+        </div>
+      </header>
+      <main className="main-content">
+        <DigitalClock time={time} />
+      </main>
+      <nav className="bottom-nav">
+        <div className="nav-container">
+          <button className="nav-item active" aria-label="Dijital">
+            <span className="material-symbols-outlined">digital_watch</span>
+            <span className="nav-label">Dijital</span>
+          </button>
+          <button className="nav-item" aria-label="Analog">
+            <span className="material-symbols-outlined">schedule</span>
+            <span className="nav-label">Analog</span>
+          </button>
+          <button className="nav-item" aria-label="Ayarlar">
+            <span className="material-symbols-outlined">settings</span>
+            <span className="nav-label">Ayarlar</span>
+          </button>
+        </div>
+      </nav>
     </div>
   )
 }
